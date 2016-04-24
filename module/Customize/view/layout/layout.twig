@@ -1,0 +1,80 @@
+{{ docType() }}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>
+        {% block title %}{% endblock title %} >> {{ translate('PServerAdmin') }}
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block meta %}{% endblock meta %}
+
+    <!-- styles -->
+    <link href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" rel="stylesheet">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link href="{{ basePath() }}/admin-layout/layout.css" media="screen" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
+
+    {% block style %}{% endblock style %}
+</head>
+<body>
+
+
+<div class="navbar navbar-fixed-top navbar-default" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            {% if isAllowed('PServerAdmin/home') %}
+                <a href="#menu-toggle" class="btn-sm btn-sidebar" id="menu-toggle"><span
+                            class="glyphicon glyphicon-th-list"></span></a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#admin-navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ url('Respirator/home') }}">{{ translate('Admin') }}</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div id="wrapper">
+    <div id="sidebar-wrapper" class="panel-collapse collapse in sidebar">
+        <ul class="nav nav-pills nav-stacked">
+            <li class="{{ active('Respirator/home') ? 'active' : '' }}">
+                <a href="{{ url('Respirator/home') }}">Home</a>
+            </li>
+            <li class="{{ active('PeachUserPanel') ? 'active' : '' }}">
+                <a href="{{ url('PeachUserPanel') }}">UserPanel</a>
+            </li>
+        </ul>
+    </div>
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    {% block content %}{{ content|raw }}{% endblock content %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script type="text/javascript" src="//code.jquery.com/jquery-2.2.3.min.js"></script>
+<script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+{#<script type="text/javascript" src="{{ basePath() }}/js/function.js"></script>#}
+{% block script %}{% endblock script %}
+<script>
+    jQuery("#menu-toggle").click(function (e) {
+        e.preventDefault();
+        jQuery("#wrapper").toggleClass("toggled");
+    });
+
+    jQuery('.datepicker').datepicker({
+        'dateFormat': 'yy-mm-dd'
+    });
+</script>
+</body>
+</html>

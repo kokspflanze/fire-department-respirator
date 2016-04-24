@@ -1,0 +1,50 @@
+{
+  "name": "kokspflanze/fire-department-respirator",
+  "description": "for www.feuerwehr-talheim.de ",
+  "keywords": [
+    "framework",
+    "zf2",
+    "feuerwehr-talheim.de"
+  ],
+  "homepage": "https://github.com/kokspflanze/fire-department-respirator",
+  "authors": [
+    {
+      "name": "Oliver",
+      "email": "kokspflanze@protonmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=7",
+    "ext-intl" : "*",
+    "ext-gd" : "*",
+    "ext-curl" : "*",
+    "ext-json" : "*",
+    "twig/twig": "~1.24",
+    "zendframework/zend-servicemanager": "~2.7",
+    "zendframework/zend-mvc": "~2.5",
+    "zendframework/zend-loader": "~2.5",
+    "zendframework/zend-escaper": "~2.5",
+    "zendframework/zend-config": "~2.5",
+    "zendframework/zend-view": "~2.5",
+    "zendframework/zend-serializer": "~2.5",
+    "zendframework/zend-log": "~2.5",
+    "zendframework/zend-i18n": "~2.5",
+    "zendframework/zend-session": "~2.5",
+    "zendframework/zend-http": "~2.5",
+    "zendframework/zend-hydrator": "~1.1|~2.1",
+    "zendframework/zend-cache": "~2.5",
+    "zendframework/zend-stdlib": "~2.5|~3.0",
+    "zendframework/zend-form": "~2.5",
+    "zendframework/zend-inputfilter": "~2.5",
+    "zendframework/zend-validator": "~2.5",
+    "zendframework/zend-mail": "~2.5",
+    "zendframework/zend-mime": "~2.5",
+    "zendframework/zend-router": "~2.5",
+    "zendframework/zend-console": "~2.5",
+    "doctrine/doctrine-orm-module": "~0.1",
+    "kokspflanze/small-user": "dev-master as 1.9",
+    "thadafinser/zfc-datagrid": "dev-master as 1.9",
+    "zf-commons/zfc-twig": "dev-master",
+    "zendframework/zend-developer-tools": "dev-master"
+  }
+}
