@@ -17,6 +17,20 @@ return [
                 ],
                 'may_terminate' => true,
                 'child_routes' => [
+                    'edit' => [
+                        'type' => 'segment',
+                        'options' => [
+                            'route' => '/edit[-:id].html',
+                            'constraints' => [
+                                'action' => '[a-zA-Z]+',
+                                'id' => '[0-9]+'
+                            ],
+                            'defaults' => [
+                                'controller' => Controller\EditController::class,
+                                'action' => 'index'
+                            ],
+                        ],
+                    ],
                 ],
             ],
         ],
@@ -24,6 +38,7 @@ return [
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => Controller\IndexFactory::class,
+            Controller\EditController::class => Controller\EditFactory::class,
         ],
     ],
     'service_manager' => [

@@ -6,6 +6,7 @@ namespace PeachUserPanel\Controller;
 
 use PeachUserPanel\Service\UserPanel;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Renderer\RendererInterface;
 use ZfcDatagrid\Column;
 use ZfcDatagrid\Datagrid;
 
@@ -16,16 +17,20 @@ class IndexController extends AbstractActionController
 
     /** @var  UserPanel */
     protected $serviceUserPanel;
+    /** @var  RendererInterface */
+    protected $renderer;
 
     /**
      * IndexController constructor.
      * @param Datagrid $dataGrid
      * @param UserPanel $serviceUserPanel
+     * @param RendererInterface $renderer
      */
-    public function __construct(Datagrid $dataGrid, UserPanel $serviceUserPanel)
+    public function __construct(Datagrid $dataGrid, UserPanel $serviceUserPanel, RendererInterface $renderer)
     {
         $this->dataGrid = $dataGrid;
         $this->serviceUserPanel = $serviceUserPanel;
+        $this->renderer = $renderer;
     }
 
     /**
@@ -41,6 +46,13 @@ class IndexController extends AbstractActionController
 
         $col = new Column\Select('usrId', 'p');
         $col->setLabel('#');
+        $col->addFormatter(
+            new Column\Formatter\GenerateLink(
+                $this->renderer,
+                'PeachUserPanel/edit',
+                'id'
+            )
+        );
         $grid->addColumn($col);
         $col = new Column\Select('username', 'p');
         $col->setLabel('Username');

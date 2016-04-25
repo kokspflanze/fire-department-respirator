@@ -9,8 +9,6 @@ use PeachUserPanel\Options\EntityOptions;
 
 class UserPanel
 {
-    const ErrorNameSpace = 'p-server-admin-user-panel';
-
     /** @var  EntityManager */
     protected $entityManager;
 
@@ -51,15 +49,5 @@ class UserPanel
         return $userRepository->getUser4Id($userId);
     }
 
-    /**
-     * @param int $backendId
-     * @return null|\SmallUser\Entity\UserInterface
-     */
-    public function getUser4BackendId($backendId)
-    {
-        /** @var \SmallUser\Entity\Repository\User $repository */
-        $repository = $this->entityManager->getRepository($this->entityOptions->getUser());
 
-        return $repository->findOneBy(['backendId' => $backendId]);
-    }
 }

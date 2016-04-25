@@ -43,7 +43,9 @@ return [
         'resource_providers' => [
             \BjyAuthorize\Provider\Resource\Config::class => [
                 'Respirator' => [],
+                'Respirator/home' => [],
                 'PeachUserPanel' => [],
+                'PeachUserPanel/edit' => [],
                 'small-user-auth' => [],
             ],
         ],
@@ -63,7 +65,9 @@ return [
                     ['guest', 'small-user-auth', 'index'],
                     [[], 'small-user-auth', 'logout'],
                     [[], 'Respirator'],
-                    [[], 'PeachUserPanel'],
+                    [['user'], 'Respirator/home'],
+                    [['user'], 'PeachUserPanel'],
+                    [['admin'], 'PeachUserPanel/edit'],
                 ],
 
                 // Don't mix allow/deny rules if you are using role inheritance.
@@ -105,7 +109,8 @@ return [
                 ['controller' => \Customize\Controller\IndexController::class, 'roles' => []],
                 ['controller' => 'SmallUser\Controller\Auth', 'roles' => []],
                 ['controller' => \Customize\Controller\HomeController::class, 'roles' => ['user']],
-                ['controller' => \PeachUserPanel\Controller\IndexController::class, 'roles' => []],
+                ['controller' => \PeachUserPanel\Controller\IndexController::class, 'roles' => ['user']],
+                ['controller' => \PeachUserPanel\Controller\EditController::class, 'roles' => ['admin']],
             ],
 
             /* If this guard is specified here (i.e. it is enabled], it will block
