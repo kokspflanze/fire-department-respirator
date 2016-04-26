@@ -49,7 +49,7 @@ class IndexController extends AbstractActionController
         $col->addFormatter(
             new Column\Formatter\GenerateLink(
                 $this->renderer,
-                'PeachUserPanel/edit',
+                'PeachUserPanel/detail',
                 'id'
             )
         );

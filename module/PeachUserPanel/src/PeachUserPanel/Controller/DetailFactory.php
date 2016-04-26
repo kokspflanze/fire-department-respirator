@@ -9,15 +9,15 @@ use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class EditFactory implements FactoryInterface
+class DetailFactory implements FactoryInterface
 {
     /**
      * @param ServiceLocatorInterface|AbstractPluginManager $serviceLocator
-     * @return EditController
+     * @return DetailController
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return new EditController(
+        return new DetailController(
             $serviceLocator->getServiceLocator()->get(UserPanel::class)
         );
     }

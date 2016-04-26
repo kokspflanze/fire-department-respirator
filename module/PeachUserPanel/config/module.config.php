@@ -2,6 +2,7 @@
 
 use PeachUserPanel\Controller;
 use PeachUserPanel\Service;
+use PeachUserPanel\Form;
 
 return [
     'router' => [
@@ -17,7 +18,7 @@ return [
                 ],
                 'may_terminate' => true,
                 'child_routes' => [
-                    'edit' => [
+                    'detail' => [
                         'type' => 'segment',
                         'options' => [
                             'route' => '/edit[-:id].html',
@@ -26,7 +27,7 @@ return [
                                 'id' => '[0-9]+'
                             ],
                             'defaults' => [
-                                'controller' => Controller\EditController::class,
+                                'controller' => Controller\DetailController::class,
                                 'action' => 'index'
                             ],
                         ],
@@ -38,12 +39,13 @@ return [
     'controllers' => [
         'factories' => [
             Controller\IndexController::class => Controller\IndexFactory::class,
-            Controller\EditController::class => Controller\EditFactory::class,
+            Controller\DetailController::class => Controller\DetailFactory::class,
         ],
     ],
     'service_manager' => [
         'factories' => [
             Service\UserPanel::class => Service\UserPanelFactory::class,
+            Form\User::class => Form\UserFactory::class
         ],
     ],
     'view_manager' => [
