@@ -23,7 +23,7 @@
 <div class="navbar navbar-fixed-top navbar-default" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
-            {% if isAllowed('PServerAdmin/home') %}
+            {% if isAllowed('Respirator/home') %}
                 <a href="#menu-toggle" class="btn-sm btn-sidebar" id="menu-toggle"><span
                             class="glyphicon glyphicon-th-list"></span></a>
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#admin-navbar">
@@ -34,6 +34,15 @@
                 </button>
                 <a class="navbar-brand" href="{{ url('Respirator/home') }}">{{ translate('Admin') }}</a>
             {% endif %}
+        </div>
+        <div class="collapse navbar-collapse" id="admin-navbar">
+            <ul class="nav navbar-nav navbar-right">
+                {% if isAllowed('small-user-auth','logout') %}
+                    <li><a href="{{ url('small-user-auth', {'action':'logout'}) }}">{{ translate('Logout') }}</a></li>
+                {% else %}
+                    <li><a href="{{ url('small-user-auth', {'action':'login'}) }}">{{ translate('Login') }}</a></li>
+                {% endif %}
+            </ul>
         </div>
     </div>
 </div>

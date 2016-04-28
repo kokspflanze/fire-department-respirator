@@ -4,6 +4,7 @@
 namespace PeachUserPanel\Service;
 
 
+use Doctrine\Common\Util\Debug;
 use Doctrine\ORM\EntityManager;
 use PeachUserPanel\Options\EntityOptions;
 use SmallUser\Entity\UserInterface;
@@ -68,10 +69,13 @@ class UserPanel
      */
     public function editUser($data, UserInterface $currentUser = null)
     {
+        $oldPassword = '';
         if (!$currentUser) {
             /** @var UserInterface $class */
             $class = $this->entityOptions->getUser();
             $currentUser = new $class;
+        } else {
+            $oldPassword = $currentUser->getPassword();
         }
 
         $this->userForm->setHydrator(new HydratorUser());
@@ -85,7 +89,7 @@ class UserPanel
         /** @var UserInterface $user */
         $user = $this->userForm->getData();
         if (!$user->getPassword()) {
-            $user->setPassword($currentUser->getPassword());
+            $user->setPassword($oldPassword);
         } else {
             $bCrypt = new Bcrypt();
             $user->setPassword($bCrypt->create($user->getPassword()));
