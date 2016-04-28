@@ -42,7 +42,7 @@ class IndexController extends AbstractActionController
         $grid = $this->dataGrid;
         $grid->setTitle('user-panel grid');
         $grid->setDataSource($this->serviceUserPanel->getUserListQueryBuilder());
-        $grid->setToolbarTemplate(null);
+        $grid->setToolbarTemplate('peach-cms-user-panel/index/new');
 
         $col = new Column\Select('usrId', 'p');
         $col->setLabel('#');

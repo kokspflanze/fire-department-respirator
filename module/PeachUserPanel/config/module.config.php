@@ -3,6 +3,8 @@
 use PeachUserPanel\Controller;
 use PeachUserPanel\Service;
 use PeachUserPanel\Form;
+use PeachUserPanel\View;
+use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
     'router' => [
@@ -21,7 +23,7 @@ return [
                     'detail' => [
                         'type' => 'segment',
                         'options' => [
-                            'route' => '/edit[-:id].html',
+                            'route' => '/detail[/:action][-:id].html',
                             'constraints' => [
                                 'action' => '[a-zA-Z]+',
                                 'id' => '[0-9]+'
@@ -48,9 +50,20 @@ return [
             Form\User::class => Form\UserFactory::class
         ],
     ],
+    'view_helpers' => [
+        'aliases' => [
+            'pserverformerrors' => View\Helper\FormError::class,
+            'formWidget' => View\Helper\FormWidget::class,
+        ],
+        'factories' => [
+            View\Helper\FormError::class => InvokableFactory::class,
+            View\Helper\FormWidget::class => InvokableFactory::class,
+        ],
+    ],
     'view_manager' => [
         'template_map' => [
-            
+            'peach-cms-user-panel/index/new' => __DIR__ . '/../view/peach-user-panel/index/index.phtml',
+            'helper/formWidget' => __DIR__ . '/../view/helper/form.phtml',
         ],
         'template_path_stack' => [
             __DIR__ . '/../view',

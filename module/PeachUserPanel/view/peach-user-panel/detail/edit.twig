@@ -1,0 +1,9 @@
+{% extends 'layout/layout' %}
+
+{% block title %}
+    {{ translate('UserDetailsEdit') }} - {{ user.getUsername }} [{{ user.getId }}]
+{% endblock title %}
+
+{% block content %}
+    {{ formWidget(userForm) }}
+{% endblock content %}

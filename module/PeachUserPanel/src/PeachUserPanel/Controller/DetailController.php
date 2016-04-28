@@ -4,7 +4,9 @@
 namespace PeachUserPanel\Controller;
 
 
+use PeachUserPanel\Mapper\UserHydrator;
 use PeachUserPanel\Service\UserPanel;
+use SmallUser\Mapper\HydratorUser;
 use Zend\Mvc\Controller\AbstractActionController;
 
 class DetailController extends AbstractActionController
@@ -21,6 +23,9 @@ class DetailController extends AbstractActionController
         $this->serviceUserPanel = $serviceUserPanel;
     }
 
+    /**
+     * @return array|\Zend\Http\Response
+     */
     public function indexAction()
     {
         $userId = $this->params()->fromRoute('id');
@@ -31,8 +36,7 @@ class DetailController extends AbstractActionController
         }
 
         return [
-            'user' => $user,
-            'userForm' => $this->serviceUserPanel->getUserForm()
+            'user' => $user
         ];
     }
 
@@ -44,5 +48,44 @@ class DetailController extends AbstractActionController
         if (!$user) {
             return $this->redirect()->toRoute('PeachUserPanel');
         }
+
+        $userForm = $this->serviceUserPanel->getUserForm();
+
+        /** @var \Zend\Http\Request $request */
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            if ($this->serviceUserPanel->editUser($this->params()->fromPost(), $user)) {
+                return $this->redirect()->toRoute('PeachUserPanel');
+            }
+        } else {
+            $userForm->setHydrator(new HydratorUser());
+            $userForm->bind($user);
+        }
+
+        return [
+            'user' => $user,
+            'userForm' => $userForm
+        ];
+    }
+
+    /**
+     * @return array
+     */
+    public function newAction()
+    {
+        $userForm = $this->serviceUserPanel->getUserForm();
+
+        /** @var \Zend\Http\Request $request */
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $user = $this->serviceUserPanel->editUser($this->params()->fromPost());
+            if ($user) {
+                return $this->redirect()->toRoute('PeachUserPanel');
+            }
+        }
+
+        return [
+            'userForm' => $userForm
+        ];
     }
 }

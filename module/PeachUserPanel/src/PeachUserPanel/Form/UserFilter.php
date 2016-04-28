@@ -44,31 +44,32 @@ class UserFilter extends ProvidesEventsInputFilter
 
         $this->add([
             'name' => 'password',
+            'allow_empty' => true,
             'filters' => [
                 new Filter\StringTrim()
             ],
             'validators' => [
                 new Validator\StringLength([
-                    'min' => 3,
                     'max' => 32,
-                ])
+                ]),
+                new Validator\NotEmpty()
             ],
         ]);
 
         $this->add([
             'name' => 'passwordVerify',
+            'allow_empty' => true,
             'filters' => [
                 new Filter\StringTrim()
             ],
             'validators' => [
                 new Validator\StringLength([
-                    'min' => 3,
                     'max' => 32,
-                ])
-                ,
+                ]),
                 new Validator\Identical([
                     'token' => 'password',
-                ])
+                ]),
+                new Validator\NotEmpty()
             ],
         ]);
     }

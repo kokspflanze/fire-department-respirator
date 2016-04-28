@@ -52,7 +52,6 @@ class User extends ProvidesEventsForm
                 'placeholder' => 'Password',
                 'class' => 'form-control',
                 'type' => 'password',
-                'required' => true,
             ],
         ]);
 
@@ -65,7 +64,6 @@ class User extends ProvidesEventsForm
                 'placeholder' => 'Password Verify',
                 'class' => 'form-control',
                 'type' => 'password',
-                'required' => true,
             ],
         ]);
 

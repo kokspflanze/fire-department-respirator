@@ -1,0 +1,9 @@
+{% extends 'layout/layout' %}
+
+{% block title %}
+    {{ translate('UserCreate') }}
+{% endblock title %}
+
+{% block content %}
+    {{ formWidget(userForm) }}
+{% endblock content %}
