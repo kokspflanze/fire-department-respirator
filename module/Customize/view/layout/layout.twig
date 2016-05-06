@@ -53,12 +53,12 @@
 
             {% if isAllowed('Respirator/home') %}
                 <li class="{{ active('Respirator/home') ? 'active' : '' }}">
-                    <a href="{{ url('Respirator/home') }}">Home</a>
+                    <a href="{{ url('Respirator/home') }}">{{ translate('Home') }}</a>
                 </li>
             {% endif %}
             {% if isAllowed('PeachUserPanel') %}
                 <li class="{{ active('PeachUserPanel') ? 'active' : '' }}">
-                    <a href="{{ url('PeachUserPanel') }}">UserPanel</a>
+                    <a href="{{ url('PeachUserPanel') }}">{{ translate('UserPanel') }}</a>
                 </li>
             {% endif %}
         </ul>
@@ -84,10 +84,6 @@
     jQuery("#menu-toggle").click(function (e) {
         e.preventDefault();
         jQuery("#wrapper").toggleClass("toggled");
-    });
-
-    jQuery('.datepicker').datepicker({
-        'dateFormat': 'yy-mm-dd'
     });
 </script>
 </body>
