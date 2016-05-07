@@ -46,6 +46,7 @@ return [
                 'Respirator/home' => [],
                 'PeachUserPanel' => [],
                 'PeachUserPanel/detail' => [],
+                'PeachUserPanel/role' => [],
                 'small-user-auth' => [],
             ],
         ],
@@ -68,6 +69,7 @@ return [
                     [['user'], 'Respirator/home'],
                     [['user'], 'PeachUserPanel'],
                     [['admin'], 'PeachUserPanel/detail'],
+                    [['admin'], 'PeachUserPanel/role'],
                 ],
 
                 // Don't mix allow/deny rules if you are using role inheritance.
@@ -111,6 +113,7 @@ return [
                 ['controller' => \Customize\Controller\HomeController::class, 'roles' => ['user']],
                 ['controller' => \PeachUserPanel\Controller\IndexController::class, 'roles' => ['user']],
                 ['controller' => \PeachUserPanel\Controller\DetailController::class, 'roles' => ['admin']],
+                ['controller' => \PeachUserPanel\Controller\RoleController::class, 'roles' => ['admin']],
             ],
 
             /* If this guard is specified here (i.e. it is enabled], it will block

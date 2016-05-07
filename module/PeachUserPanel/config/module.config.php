@@ -34,6 +34,21 @@ return [
                             ],
                         ],
                     ],
+                    'role' => [
+                        'type' => 'segment',
+                        'options' => [
+                            'route' => '/role[/:action][-:id][/:roleId].html',
+                            'constraints' => [
+                                'action' => '[a-zA-Z]+',
+                                'id' => '[0-9]+',
+                                'roleId' => '[0-9]+',
+                            ],
+                            'defaults' => [
+                                'controller' => Controller\RoleController::class,
+                                'action' => 'index'
+                            ],
+                        ],
+                    ],
                 ],
             ],
         ],
@@ -42,12 +57,15 @@ return [
         'factories' => [
             Controller\IndexController::class => Controller\IndexFactory::class,
             Controller\DetailController::class => Controller\DetailFactory::class,
+            Controller\RoleController::class => Controller\RoleFactory::class,
         ],
     ],
     'service_manager' => [
         'factories' => [
             Service\UserPanel::class => Service\UserPanelFactory::class,
-            Form\User::class => Form\UserFactory::class
+            Service\RoleService::class => Service\RoleFactory::class,
+            Form\User::class => Form\UserFactory::class,
+            Form\UserRole::class => Form\UserRoleFactory::class,
         ],
     ],
     'view_helpers' => [

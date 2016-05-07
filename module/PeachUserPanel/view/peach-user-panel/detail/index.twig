@@ -40,7 +40,30 @@
                                     </tr>
                                 </table>
                             </div>
-                            <a href="{{ url('PeachUserPanel/detail', {'action' : 'edit', 'id' : user.getId}) }}" class="btn btn-danger btn-xs">edit</a>
+                            <a href="{{ url('PeachUserPanel/detail', {'action' : 'edit', 'id' : user.getId}) }}" class="btn btn-danger btn-xs">{{ translate('edit') }}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">{{ translate('Roles') }}</div>
+                        <div class="panel-body">
+                            <ul class="list-unstyled">
+                                {% for key, role in user.getRoles %}
+                                    <li>
+                                        {{ role.getRoleId|capitalize }}
+                                        {% if isAllowed('PeachUserPanel/role') %}
+                                            <a href="{{ url('PeachUserPanel/role', {'action' : 'remove', 'id' : user.getId, 'roleId' : role.getId})}}">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                            {% if isAllowed('PeachUserPanel/role') %}
+                                {% set a = roleForm.setAttribute('action', url('PeachUserPanel/role', {'action' : 'add', 'id' : user.getId})) %}
+                                {{ formWidget(roleForm) }}
+                            {% endif %}
                         </div>
                     </div>
                 </div>

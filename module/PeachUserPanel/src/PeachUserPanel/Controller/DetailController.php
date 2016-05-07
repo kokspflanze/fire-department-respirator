@@ -5,6 +5,7 @@ namespace PeachUserPanel\Controller;
 
 
 use PeachUserPanel\Mapper\UserHydrator;
+use PeachUserPanel\Service\RoleService;
 use PeachUserPanel\Service\UserPanel;
 use SmallUser\Mapper\HydratorUser;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -13,14 +14,18 @@ class DetailController extends AbstractActionController
 {
     /** @var  UserPanel */
     protected $serviceUserPanel;
+    /** @var  RoleService */
+    protected $roleService;
 
     /**
      * EditController constructor.
      * @param UserPanel $serviceUserPanel
+     * @param RoleService $roleService
      */
-    public function __construct(UserPanel $serviceUserPanel)
+    public function __construct(UserPanel $serviceUserPanel, RoleService $roleService)
     {
         $this->serviceUserPanel = $serviceUserPanel;
+        $this->roleService = $roleService;
     }
 
     /**
@@ -36,7 +41,8 @@ class DetailController extends AbstractActionController
         }
 
         return [
-            'user' => $user
+            'user' => $user,
+            'roleForm' => $this->roleService->getAdminUserRoleForm(),
         ];
     }
 
