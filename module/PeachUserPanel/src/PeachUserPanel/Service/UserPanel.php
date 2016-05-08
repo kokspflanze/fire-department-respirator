@@ -102,6 +102,15 @@ class UserPanel
     }
 
     /**
+     * @param UserInterface $user
+     */
+    public function deleteUser(UserInterface $user)
+    {
+        $this->entityManager->remove($user);
+        $this->entityManager->flush();
+    }
+
+    /**
      * @return FormInterface
      */
     public function getUserForm()

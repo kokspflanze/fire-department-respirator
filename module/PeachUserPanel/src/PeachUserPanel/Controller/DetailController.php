@@ -74,6 +74,32 @@ class DetailController extends AbstractActionController
         ];
     }
 
+    public function deleteAction()
+    {
+        $userId = $this->params()->fromRoute('id');
+
+        $user = $this->serviceUserPanel->getUser4Id($userId);
+        if (!$user) {
+            return $this->redirect()->toRoute('PeachUserPanel');
+        }
+
+        return [
+            'user' => $user,
+        ];
+    }
+
+    public function deleteConfirmAction()
+    {
+        $userId = $this->params()->fromRoute('id');
+
+        $user = $this->serviceUserPanel->getUser4Id($userId);
+        if ($user) {
+            $this->serviceUserPanel->deleteUser($user);
+        }
+
+        return $this->redirect()->toRoute('PeachUserPanel');
+    }
+
     /**
      * @return array
      */

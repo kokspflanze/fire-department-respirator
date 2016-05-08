@@ -25,7 +25,7 @@ return [
                         'options' => [
                             'route' => '/detail[/:action][-:id].html',
                             'constraints' => [
-                                'action' => '[a-zA-Z]+',
+                                'action' => '[a-zA-Z-]+',
                                 'id' => '[0-9]+'
                             ],
                             'defaults' => [

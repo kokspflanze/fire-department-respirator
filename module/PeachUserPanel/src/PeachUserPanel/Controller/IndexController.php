@@ -17,7 +17,7 @@ class IndexController extends AbstractActionController
 
     /** @var  UserPanel */
     protected $serviceUserPanel;
-    /** @var  RendererInterface */
+    /** @var  \Zend\View\Renderer\PhpRenderer */
     protected $renderer;
 
     /**
@@ -46,14 +46,9 @@ class IndexController extends AbstractActionController
 
         $col = new Column\Select('usrId', 'p');
         $col->setLabel('#');
-        $col->addFormatter(
-            new Column\Formatter\GenerateLink(
-                $this->renderer,
-                'PeachUserPanel/detail',
-                'id'
-            )
-        );
+        $col->setIdentity(true);
         $grid->addColumn($col);
+
         $col = new Column\Select('username', 'p');
         $col->setLabel('Username');
         $grid->addColumn($col);
@@ -64,6 +59,23 @@ class IndexController extends AbstractActionController
         $col = new Column\Select('created', 'p');
         $col->setLabel('Created');
         $col->setType(new Column\Type\DateTime('Y-m-d H:i:s', \IntlDateFormatter::LONG));
+        $grid->addColumn($col);
+
+        $buttonDelete = new Column\Action\Button();
+        $buttonDelete->setLabel('Delete');
+        $buttonDelete->setLink($this->renderer->url('PeachUserPanel/detail', ['action' => 'delete', 'id' => ':rowId:']));
+
+        $buttonEdit = new Column\Action\Button();
+        $buttonEdit->setLabel('Edit');
+        $buttonEdit->setLink($this->renderer->url('PeachUserPanel/detail', ['id' => ':rowId:']));
+
+        $col = new Column\Action('usrId', 'p');
+        $col->addAction(
+            $buttonEdit
+        );
+        $col->addAction(
+            $buttonDelete
+        );
         $grid->addColumn($col);
 
         $grid->render();
