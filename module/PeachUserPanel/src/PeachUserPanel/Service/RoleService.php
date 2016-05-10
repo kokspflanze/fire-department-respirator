@@ -13,9 +13,6 @@ use Zend\Mvc\Controller\PluginManager;
 
 class RoleService
 {
-    /** @var string */
-    const ERROR_NAME_SPACE = 'peach-admin-user-panel';
-
     /** @var  EntityManager */
     protected $entityManager;
 

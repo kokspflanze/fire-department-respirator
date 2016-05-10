@@ -54,7 +54,7 @@ class IndexController extends AbstractActionController
         $grid->addColumn($col);
         $col = new Column\Select('email', 'p');
         $col->addFormatter(new Column\Formatter\Email());
-        $col->setLabel('email');
+        $col->setLabel('Email');
         $grid->addColumn($col);
         $col = new Column\Select('created', 'p');
         $col->setLabel('Created');

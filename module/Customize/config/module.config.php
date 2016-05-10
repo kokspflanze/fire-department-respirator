@@ -1,6 +1,7 @@
 <?php
 
 use Customize\Controller;
+use Customize\Service;
 use Customize\View\Helper;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
@@ -36,6 +37,19 @@ return [
                             ],
                         ],
                     ],
+                    'reminder-user' => [
+                        'type' => 'segment',
+                        'options' => [
+                            'route' => 'reminder-user.html',
+                            'constraints' => [
+                                'action' => '[a-zA-Z]+',
+                            ],
+                            'defaults' => [
+                                'controller' => Controller\ReminderUserController::class,
+                                'action' => 'index'
+                            ],
+                        ],
+                    ],
                 ],
             ],
         ],
@@ -52,6 +66,12 @@ return [
         'factories' => [
             Controller\IndexController::class => InvokableFactory::class,
             Controller\HomeController::class => InvokableFactory::class,
+            Controller\ReminderUserController::class => Controller\ReminderUserFactory::class,
+        ],
+    ],
+    'service_manager' => [
+        'factories' => [
+            Service\ReminderUser::class => Service\ReminderUserFactory::class,
         ],
     ],
     'view_manager' => [
@@ -70,6 +90,13 @@ return [
     'small-user' => [
         'login' => [
             'route' => 'Respirator/home',
+        ],
+    ],
+    'doctrine' => [
+        'driver' => [
+            'application_entities' => [
+                'paths' => [__DIR__ . '/../src/Customize/Entity']
+            ],
         ],
     ],
 ];
